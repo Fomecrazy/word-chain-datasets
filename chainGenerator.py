@@ -60,7 +60,7 @@ for group, words in groupedWords.items():
 chains = {}
 phrases = set()
 total = 0
-test = ""
+json = "{\n"
 
 for word in wordToGroup:
 	group = wordToGroup[word]
@@ -82,10 +82,15 @@ for word in wordToGroup:
 	total += len(candidates)
 	chains[word] = candidates # random.sample(chosen)
 
+	jsonWords = "["
 	for link in chains[word]:
-		test += f"{word} {link} \n"
+		jsonWords += f"\"{link}\","
+	jsonWords = jsonWords[:-1] + "]"
 
-with open("test.txt", "w") as f:
-	f.write(test)
+	json += f"\"{word}\":{jsonWords},\n"
+
+json += "}"
+with open("test.json", "w") as f:
+	f.write(json)
 
 print(chains, total)
