@@ -79,8 +79,8 @@ for word in wordToGroup:
 		phrases.add(phrase)
 		chosen.append(c)
 
-	total += min(len(candidates), 7)
-	chains[word] = random.sample(chosen, k=7)
+	total += len(candidates)
+	chains[word] = candidates # random.sample(chosen)
 
 	for link in chains[word]:
 		test += f"{word} {link} \n"
